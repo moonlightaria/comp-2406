@@ -1,0 +1,16 @@
+label{
+    color: darkviolet;
+    font-style: italic;
+    font-size: medium;
+}
+input[type=text]{
+    color: blue;
+    border-color: red;
+    font-size: larger;
+}
+.centered{
+    margin: auto;
+    width: 50%;
+    justify-content: center;
+    background-color: aquamarine;
+}
