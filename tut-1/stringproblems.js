@@ -1,10 +1,10 @@
 function landscape() {
-  let stringA ="";
-  let stringB ="";
+  let stringA = "";
+  let stringB = "";
 
   function flat(size) {
-    for (let count = 0; count < size; count++){
-      stringA +=" ";
+    for (let count = 0; count < size; count++) {
+      stringA += " ";
       stringB += "_";
     }
   }
@@ -12,7 +12,7 @@ function landscape() {
   function hill(size) {
     stringA += " ";
     stringB += "/";
-    for (let count = 0; count < size; count++){
+    for (let count = 0; count < size; count++) {
       stringA += "_";
       stringB += " ";
     }
@@ -29,7 +29,6 @@ function landscape() {
   //END BUILD SCRIPT
 
   return stringA + "\n" + stringB;
-
 }
 
 console.log("");

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <title>Restaurant Dish Review</title>
+  <style>
+  h1 {
+    font-size: 16pt;
+    background-color: rgb(255, 247, 0);
+    color: rgb(40, 40, 40);
+  }
+
+  p {
+    font-size: 12pt;
+    font-family: arial;
+    margin-left: 10px;
+  }
+
+  img {
+    margin-left: 10px;
+    padding-right: 20px;
+  }
+
+  strong {
+    color: rgb(100, 100, 100);
+  }
+
+  em {
+    color: darkblue;
+  }
+
+  span {
+    color: blue;
+  }
+  </style>
+
+  <script>
+    function updateRating(newRating) {    
+    let star1 = document.getElementById("rating1");
+    let star2 = document.getElementById("rating2");
+    let star3 = document.getElementById("rating3");
+    let star4 = document.getElementById("rating4");
+    let star5 = document.getElementById("rating5");
+    
+    if (newRating == 5) {
+      star5.style.color = "blue";
+      star4.style.color = "blue";
+      star3.style.color = "blue";
+      star2.style.color = "blue";
+      star1.style.color = "blue";
+    }
+    else if (newRating == 4) {
+      star5.style.color = "lightgray";
+      star4.style.color = "blue";
+      star3.style.color = "blue";
+      star2.style.color = "blue";
+      star1.style.color = "blue";
+    }
+    else if (newRating == 3) {
+      star5.style.color = "lightgray";
+      star4.style.color = "lightgray";
+      star3.style.color = "blue";
+      star2.style.color = "blue";
+      star1.style.color = "blue";
+    }
+    else if (newRating == 2) {
+      star5.style.color = "lightgray";
+      star4.style.color = "lightgray";
+      star3.style.color = "lightgray";
+      star2.style.color = "blue";
+      star1.style.color = "blue";
+    }
+    else if (newRating == 1) {
+      star5.style.color = "lightgray";
+      star4.style.color = "lightgray";
+      star3.style.color = "lightgray";
+      star2.style.color = "lightgray";
+      star1.style.color = "blue";
+    }
+  }
+  </script>
+  
+  <body>
+    <h1>Restaurant Dish Review</h1>
+    <p><strong>Rating:</strong>
+      <span id="rating1">&#9733;</span>
+      <span id="rating2">&#9733;</span>
+      <span id="rating3">&#9733;</span>
+      <span id="rating4">&#9733;</span>
+      <span id="rating5">&#9733;</span>
+    </p>
+
+    <p><strong>Update rating:</strong>
+      <div id="buttons"></div>
+      <button type="button" onclick="updateRating(1)">Rate 1</button>
+      <button type="button" onclick="updateRating(2)">Rate 2</button>
+      <button type="button" onclick="updateRating(3)">Rate 3</button>
+      <button type="button" onclick="updateRating(4)">Rate 4</button>
+      <button type="button" onclick="updateRating(5)">Rate 5</button>
+    </p>
+    <p><strong>Favorite dish:</strong> Ukrainian Borscht</p>
+
+    <img src="ukrainian-borscht.jpg" alt="Ukrainian Borscht" style="width:30%; float:left">
+
+    <p><strong>Review:</strong> If you don't know what borscht is, it is a deep red-coloured soup with cabbage, beets, potatoes, carrots, onion, garlic, and possibly beef and beans - served with sour cream and dill. Fantastic taste! Essentially, this beet borscht is a superfood and a meal in itself.
+    </p>
+
+  </body>
+
+</html>

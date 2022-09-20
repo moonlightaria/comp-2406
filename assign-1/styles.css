@@ -1,0 +1,16 @@
+select {
+  position: absolute;
+  font-size: x-large;
+}
+
+.column {
+  float: left;
+}
+
+.left {
+  width: 25%;
+}
+
+.middle {
+  width: 40%;
+}
