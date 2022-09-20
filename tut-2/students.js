@@ -170,3 +170,19 @@ let students = [
     egrade: 78.25975050135006,
   },
 ];
+
+function getStudentNames(students){
+  return students.map(n => n.fname);
+}
+
+function getPassingStudents(students){
+  return students.filter(s => s.egrade >= 80).map(n => n.fname + " " + n.lname);
+}
+
+function averageGrade(students){
+  return students.reduce((prevValue, cur) => (cur.agrade * 0.4) + (cur.tgrade * 0.1) + (cur.egrade * 0.5) + prevValue);
+}
+
+console.log(getStudentNames(students));
+console.log(getPassingStudents(students));
+console.log(averageGrade(students));

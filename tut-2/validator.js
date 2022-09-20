@@ -6,10 +6,11 @@ function validCredentials(enteredUsername, enteredPassword) {
   let passwords = ["qwerty", "EndOfLine", "year1942", "ladyj123", "PASSWORD"];
 
   // Search the usernames array for enteredUsername
-
+  let usernameIndex = usernames.indexOf(enteredUsername);
+  let passwordIndex = passwords.indexOf(enteredPassword);
   // Only return true if the enteredUsername is in username, and the
   // same location in passwords is enteredPassword
-  return true;
+  return usernameIndex === passwordIndex && usernameIndex != -1;
 }
 
 console.log("Login for ladyj: " + validCredentials("ladyj", "ladyj123")); // true
