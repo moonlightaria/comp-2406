@@ -285,3 +285,5 @@ node_modules/type-is/package.json
 node_modules/unpipe/package.json
 node_modules/utils-merge/package.json
 node_modules/vary/package.json
+.vscode/tasks.json
+test.js

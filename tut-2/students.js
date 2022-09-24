@@ -180,7 +180,7 @@ function getPassingStudents(students){
 }
 
 function averageGrade(students){
-  return students.reduce((prevValue, cur) => (cur.agrade * 0.4) + (cur.tgrade * 0.1) + (cur.egrade * 0.5) + prevValue);
+  return students.reduce((prevValue, cur) => (cur.agrade * 0.4) + (cur.tgrade * 0.1) + (cur.egrade * 0.5) + prevValue, 0)/students.length;
 }
 
 console.log(getStudentNames(students));
