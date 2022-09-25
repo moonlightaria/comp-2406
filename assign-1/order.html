@@ -7,13 +7,29 @@
   </head>
 
   <body onload="init()">
-    <select id="vendor-select"></select>
-    <br />
-    <div id="info"></div>
     <div id="main">
-      <div class="column left" id="left"></div>
+      <div class="column left" id="left">
+        <h1 id="store name"> </h1>
+        <br>
+        <p> Minimum Order: $<span id="min order"></span> </p>
+        <p> Delivery Fee: $<span id="delivery fee info"></span> </p>
+        <br>
+        <div id="categories"> </div>
+      </div>
       <div class="column middle" id="middle"></div>
-      <div class="column right" id="right"></div>
+      <div class="column right" id="right">
+        <select name="vendor-select" id="sellers"
+          onchange="validateSellerChange()"> </select>
+        <br>
+        <div id="checkout">
+          <div id="cart"> </div>
+          <p> Subtotal: <span id="subtotal"> </span> </p>
+          <p> Tax: <span id="tax"> </span> </p>
+          <p> Delivery Tax: <span id="delivery fee checkout"> </span> </p>
+          <p> Total: <span id="total"> </span> </p>
+          <div id = "submit"> </div>
+        </div>
+      </div>
     </div>
 
     <script src="client.js"></script>

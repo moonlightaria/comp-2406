@@ -316,20 +316,58 @@ let vendors = {
   "Grand and Toy": vendor03,
 };
 
-let select = document.getElementById("vendor-select");
-let currentVendor = select.selectedIndex;
+let currentSeller;
 let order = {};
 
 function init() {
-  //console.log("init");
-  document.getElementById("vendor-select").innerHTML = genSelList();
+  genSellerList();
+  generateSellerPage();
 }
 
-function genSelList() {
-  let result = '<select name="vendor-select" id="vendor-select">';
+function genSellerList() {
+  let str = "";
   Object.keys(vendors).forEach((elem) => {
-    result += `<option value="${elem}">${elem}</option>`;
+    str += `<option value="${elem}">${elem}</option>`;
   });
-  result += "</select>";
-  return result;
+  document.getElementById("sellers").innerHTML = str;
+}
+
+function generateSellerPage(){
+  select = document.getElementById("sellers");
+  let index = select.options[select.selectedIndex].value;
+  currentSeller = vendors[index];
+  document.getElementById("store name").innerText = currentSeller.name;
+  document.getElementById("min order").innerText = currentSeller.min_order;
+  document.getElementById("delivery fee info").innerText = currentSeller.delivery_fee;
+  generateStore(currentSeller);
+
+  document.getElementById("subtotal").innerText = 0;
+  document.getElementById("tax").innerText = 0;
+  document.getElementById("delivery fee checkout").innerText = currentSeller.delivery_fee;
+  document.getElementById("total").innerText = currentSeller.delivery_fee;
+  document.getElementById("submit").innerHTML = `<p> need $${currentSeller.min_order - currentSeller.delivery_fee} more to checkout`;
+
+  function generateStore(seller){
+    let inventory = "";
+    let categories = "";
+    let supplies = seller.supplies;
+    for (const category in supplies) {
+      categories += `<p> <a href = #${category}> ${category}</a>`;
+      inventory += `<h2 id = ${category}> ${category} </h2>`;
+      for (const product in supplies[category]){
+        current = supplies[category][product]; 
+        inventory += `<p>${current.name} ($${current.price}, stock= <span id= ${current.name}> ${current.stock} </span>)` + 
+        `<img src = add.png alt = "add button" onclick = addToCart(${current}) width = 3% height = "auto"</p>`;
+        inventory += `<p>${current.description}</p> <br>`;
+      }
+    }
+    document.getElementById("categories").innerHTML = categories;
+    document.getElementById("middle").innerHTML = inventory;
+  }
+}
+
+function validateSellerChange(){
+  if (confirm("do you want to clear your cart")){
+    generateSellerPage();
+  }
 }

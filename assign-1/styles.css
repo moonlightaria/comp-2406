@@ -8,9 +8,12 @@ select {
 }
 
 .left {
-  width: 25%;
+  width: 20%;
 }
 
 .middle {
   width: 40%;
+}
+.right{
+  width: 40%
 }
