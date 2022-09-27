@@ -351,16 +351,15 @@ function generateSellerPage(){
     let inventory = "";
     let categories = "";
     let supplies = seller.supplies;
-    let index = 0;
     for (const category in supplies) {
       categories += `<p> <a href = #${category}> ${category}</a>`;
       inventory += `<h2 id = ${category}> ${category} </h2>`;
       for (const product in supplies[category]){
         current = supplies[category][product]; 
-        inventory += `<p>${current.name} ($${current.price.toFixed(2)}, stock=${current.stock})` + 
-        `<img src = add.png alt = "add button" id= "${index}" onclick = addToCart(this.id) width = 3% height = "auto"</p>`;
+        inventory += `<p>${current.name} ($${current.price.toFixed(2)},` +
+        `stock=${current.stock}) <img src = add.png alt = "add button" ` + 
+        `id= "${product}" onclick = addToCart(this.id) width = 3% height = "auto"</p>`;
         inventory += `<p>${current.description}</p> <br>`;
-        index++;
       }
     }
     document.getElementById("categories").innerHTML = categories;
@@ -375,24 +374,22 @@ function validateSellerChange(){
 }
 
 function addToCart(index){
-  flag = true;
   let product = productLookup(index);
   if (document.getElementById(product.name + " cart")){
     let stock = document.getElementById(product.name + " stock").innerText;
     if (1 + Number(stock) <= product.stock){
       document.getElementById(product.name + " stock").innerText = Number(stock) + 1;
     }else{
-      flag = false;
       alert("out of stock");
+      return;
     }
   }else{
-    let str = `<p id = "${product.name + " cart"}"> ${product.name} x <span id = "${product.name + " stock"}"> 1 </span>` + 
-    `<img src = remove.png alt = "remove button" id= "${product.name}" onclick = "removeFromCart(this.id, ${product.price})" width = 3% height = "auto"</p>`;
-    document.getElementById("cart").innerHTML += str;
+    document.getElementById("cart").innerHTML += `<p id = "${product.name + " cart"}">` + 
+    `${product.name} x <span id = "${product.name + " stock"}"> 1 </span>` + 
+    `<img src = remove.png alt = "remove button" id= "${product.name}" ` + 
+    `onclick = "removeFromCart(this.id, ${product.price})" width = 3% height = "auto"</p>`;
   }
-  if (flag){
-    adjustCart(product.price);
-  }
+  adjustCart(product.price);
 }
 
 function removeFromCart(productName, price){
@@ -419,15 +416,13 @@ function adjustCart(price) {
   }
 }
 
-function productLookup(index){
-  let val=0;
+function productLookup(id){
   let supplies = currentSeller.supplies;
   for (const category in supplies) {
     for (const product in supplies[category]){
-      if (val == index){
+      if (product === id){
         return supplies[category][product];
       }
-      val += 1;
     }
   }
   return null;
