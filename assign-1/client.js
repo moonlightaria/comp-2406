@@ -329,7 +329,7 @@ function genSellerList() {
     str += `<option value="${elem}">${elem}</option>`;
   });
   document.getElementById("sellers").innerHTML = str;
-  document.getElementById("sellers").addEventListener(onchange,validateSellerChange);
+  document.getElementById("sellers").addEventListener("change",validateSellerChange);
 }
 
 function generateSellerPage(){
@@ -433,5 +433,5 @@ function productLookup(id){
 
 function submitOrder(){
   alert("order has been submited");
-  generateSellerPage();
+  init();
 }
