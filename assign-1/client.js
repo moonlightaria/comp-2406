@@ -388,16 +388,17 @@ function addToCart(index){
     document.getElementById("cart").innerHTML += `<p id = "${product.name + " cart"}">` + 
     `${product.name} x <span id = "${product.name + " stock"}"> 1 </span>` + 
     `<img src = remove.png alt = "remove button" id= "${product.name}" ` + 
-    `onclick = "removeFromCart(this, ${product.price})" width = 3% height = "auto"</p>`;
+    `onclick = "removeFromCart(this.id, ${product.price})" width = 3% height = "auto"</p>`;
   }
   adjustCart(product.price);
 }
 
-function removeFromCart(element, price){
-  if (element.innerText -1 <=0){
-    element.remove();
+function removeFromCart(productName, price){
+  stock = document.getElementById(productName + " stock").innerText;
+  if (stock -1 <=0){
+    document.getElementById(productName + " cart").remove();
   }else{
-    element.innerText = Number(element.innerText) -1;
+    document.getElementById(productName + " stock").innerText = stock -1;
   }
   adjustCart(-price);
 }
