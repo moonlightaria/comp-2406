@@ -13,12 +13,7 @@ function init(){
 
 function updateRating(newRating){
     for (let i=1; i<=numStars; i++){
-        let color;
-        if (i>newRating){
-            color = "lightgray";
-        }else{
-            color = "blue";
-        }
+        let color = (i>newRating) ? "lightgray" : "blue";
         document.getElementById(`rating ${i}`).style.color = color;
     }
 }
