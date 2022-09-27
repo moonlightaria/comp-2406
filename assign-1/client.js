@@ -317,7 +317,6 @@ let vendors = {
 };
 
 let currentSeller;
-let order = {};
 
 function init() {
   genSellerList();
@@ -337,28 +336,31 @@ function generateSellerPage(){
   let index = select.options[select.selectedIndex].value;
   currentSeller = vendors[index];
   document.getElementById("store name").innerText = currentSeller.name;
-  document.getElementById("min order").innerText = currentSeller.min_order;
-  document.getElementById("delivery fee info").innerText = currentSeller.delivery_fee;
+  document.getElementById("min order").innerText = currentSeller.min_order.toFixed(2);
+  document.getElementById("delivery fee info").innerText = currentSeller.delivery_fee.toFixed(2);
   generateStore(currentSeller);
-
-  document.getElementById("subtotal").innerText = 0;
-  document.getElementById("tax").innerText = 0;
-  document.getElementById("delivery fee checkout").innerText = currentSeller.delivery_fee;
-  document.getElementById("total").innerText = currentSeller.delivery_fee;
-  document.getElementById("submit").innerHTML = `<p> need $${currentSeller.min_order - currentSeller.delivery_fee} more to checkout`;
+  
+  document.getElementById("cart").innerHTML = "";
+  document.getElementById("subtotal").innerText = "0.00";
+  document.getElementById("tax").innerText = "0.00";
+  document.getElementById("delivery fee checkout").innerText = currentSeller.delivery_fee.toFixed(2);
+  document.getElementById("total").innerText = currentSeller.delivery_fee.toFixed(2);
+  document.getElementById("submit").innerHTML = `<p> need $${(currentSeller.min_order - currentSeller.delivery_fee).toFixed(2)} more to checkout`;
 
   function generateStore(seller){
     let inventory = "";
     let categories = "";
     let supplies = seller.supplies;
+    let index = 0;
     for (const category in supplies) {
       categories += `<p> <a href = #${category}> ${category}</a>`;
       inventory += `<h2 id = ${category}> ${category} </h2>`;
       for (const product in supplies[category]){
         current = supplies[category][product]; 
-        inventory += `<p>${current.name} ($${current.price}, stock= <span id= ${current.name}> ${current.stock} </span>)` + 
-        `<img src = add.png alt = "add button" onclick = addToCart(${current}) width = 3% height = "auto"</p>`;
+        inventory += `<p>${current.name} ($${current.price.toFixed(2)}, stock=${current.stock})` + 
+        `<img src = add.png alt = "add button" id= "${index}" onclick = addToCart(this.id) width = 3% height = "auto"</p>`;
         inventory += `<p>${current.description}</p> <br>`;
+        index++;
       }
     }
     document.getElementById("categories").innerHTML = categories;
@@ -370,4 +372,68 @@ function validateSellerChange(){
   if (confirm("do you want to clear your cart")){
     generateSellerPage();
   }
+}
+
+function addToCart(index){
+  flag = true;
+  let product = productLookup(index);
+  if (document.getElementById(product.name + " cart")){
+    let stock = document.getElementById(product.name + " stock").innerText;
+    if (1 + Number(stock) <= product.stock){
+      document.getElementById(product.name + " stock").innerText = Number(stock) + 1;
+    }else{
+      flag = false;
+      alert("out of stock");
+    }
+  }else{
+    let str = `<p id = "${product.name + " cart"}"> ${product.name} x <span id = "${product.name + " stock"}"> 1 </span>` + 
+    `<img src = remove.png alt = "remove button" id= "${product.name}" onclick = "removeFromCart(this.id, ${product.price})" width = 3% height = "auto"</p>`;
+    document.getElementById("cart").innerHTML += str;
+  }
+  if (flag){
+    adjustCart(product.price);
+  }
+}
+
+function removeFromCart(productName, price){
+  stock = document.getElementById(productName + " stock").innerText;
+  if (stock -1 <=0){
+    document.getElementById(productName + " cart").remove();
+  }else{
+    document.getElementById(productName + " stock").innerText = stock -1;
+  }
+  adjustCart(-price);
+}
+
+function adjustCart(price) {
+  subtotal = Number(document.getElementById("subtotal").innerText);
+  subtotal += price;
+  document.getElementById("subtotal").innerText = subtotal.toFixed(2);
+  document.getElementById("tax").innerText = (subtotal / 10).toFixed(2);
+  total = currentSeller.delivery_fee + subtotal + subtotal / 10;
+  document.getElementById("total").innerText = total.toFixed(2);
+  if (total > currentSeller.min_order) {
+    document.getElementById("submit").innerHTML = `<button onclick="submitOrder()"> submit order </button>`;
+  } else {
+    document.getElementById("submit").innerHTML = `<p> need $${(currentSeller.min_order - total).toFixed(2)} more to checkout`;
+  }
+}
+
+function productLookup(index){
+  let val=0;
+  let supplies = currentSeller.supplies;
+  for (const category in supplies) {
+    for (const product in supplies[category]){
+      if (val == index){
+        return supplies[category][product];
+      }
+      val += 1;
+    }
+  }
+  return null;
+}
+
+function submitOrder(){
+  alert("order has been submited");
+  init();
 }
