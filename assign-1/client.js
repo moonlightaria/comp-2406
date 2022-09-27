@@ -329,6 +329,7 @@ function genSellerList() {
     str += `<option value="${elem}">${elem}</option>`;
   });
   document.getElementById("sellers").innerHTML = str;
+  document.getElementById("sellers").addEventListener(onchange,validateSellerChange);
 }
 
 function generateSellerPage(){
@@ -409,11 +410,13 @@ function adjustCart(price) {
   document.getElementById("tax").innerText = (subtotal / 10).toFixed(2);
   total = currentSeller.delivery_fee + subtotal + subtotal / 10;
   document.getElementById("total").innerText = total.toFixed(2);
+  let str;
   if (total > currentSeller.min_order) {
-    document.getElementById("submit").innerHTML = `<button onclick="submitOrder()"> submit order </button>`;
+    str = `<button onclick="submitOrder()"> submit order </button>`;
   } else {
-    document.getElementById("submit").innerHTML = `<p> need $${(currentSeller.min_order - total).toFixed(2)} more to checkout`;
+    str = `<p> need $${(currentSeller.min_order - total).toFixed(2)} more to checkout`;
   }
+  document.getElementById("submit").innerHTML = str;
 }
 
 function productLookup(id){
@@ -430,5 +433,5 @@ function productLookup(id){
 
 function submitOrder(){
   alert("order has been submited");
-  init();
+  generateSellerPage();
 }
