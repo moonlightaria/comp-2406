@@ -1,0 +1,15 @@
+name: evan hall
+date: 2022-10-04
+purpose: program to render a sample client for a store interface,
+         allows for adding and selling goods thorugh a cart
+
+structure:
+html render template for populating with data, then calls init
+init loads the store select thorugh genSellerList then calls generateSellerPage to populate the page
+generate seller page populates the html with the data in the seller then calls generateStore to generate the store
+generateStore fills the store with product and add the links to the product categories by looping thorugh all feilds in supplies
+
+cart works by adding and removing products based on an id and modifications of that id to reference different html elements
+whenever an itme is added or removed from the cart the stock number is changed or element is added or removed with the total being adjusted by the adjust cart function
+
+when cart is submited or user switches seller, calls generateSellerPage again to reset the page

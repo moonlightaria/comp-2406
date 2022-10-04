@@ -333,6 +333,7 @@ function genSellerList() {
 }
 
 function generateSellerPage(){
+  //set store info
   select = document.getElementById("sellers");
   let index = select.options[select.selectedIndex].value;
   currentSeller = vendors[index];
@@ -341,12 +342,13 @@ function generateSellerPage(){
   document.getElementById("delivery fee info").innerText = currentSeller.delivery_fee.toFixed(2);
   generateStore(currentSeller);
   
+  //set cart info
   document.getElementById("cart").innerHTML = "";
   document.getElementById("subtotal").innerText = "0.00";
   document.getElementById("tax").innerText = "0.00";
   document.getElementById("delivery fee checkout").innerText = currentSeller.delivery_fee.toFixed(2);
   document.getElementById("total").innerText = currentSeller.delivery_fee.toFixed(2);
-  document.getElementById("submit").innerHTML = `<p> need $${(currentSeller.min_order - currentSeller.delivery_fee).toFixed(2)} more to checkout`;
+  document.getElementById("submit").innerHTML = `<p> need $<b>${(currentSeller.min_order - currentSeller.delivery_fee).toFixed(2)}</b> more to checkout`;
 
   function generateStore(seller){
     let inventory = "";
@@ -359,8 +361,8 @@ function generateSellerPage(){
         current = supplies[category][product]; 
         inventory += `<p>${current.name} ($${current.price.toFixed(2)},` +
         `stock=${current.stock}) <img src = add.png alt = "add button" ` + 
-        `id= "${product}" onclick = addToCart(this.id) width = 3% height = "auto"</p>`;
-        inventory += `<p>${current.description}</p> <br>`;
+        `id= "${product}" onclick = addToCart(this.id) width = 3%`;
+        inventory += `<br><p>${current.description}</p> <br>`;
       }
     }
     document.getElementById("categories").innerHTML = categories;
@@ -373,10 +375,12 @@ function validateSellerChange(){
     generateSellerPage();
   }
 }
-
-function addToCart(index){
-  let product = productLookup(index);
+//adds 1 of the given item to the cart of the provided id
+function addToCart(id){
+  let product = productLookup(id);
+  //check if product exists in cart
   if (document.getElementById(product.name + " cart")){
+    //check if stock is maxed
     let stock = document.getElementById(product.name + " stock").innerText;
     if (1 + Number(stock) <= product.stock){
       document.getElementById(product.name + " stock").innerText = Number(stock) + 1;
@@ -384,6 +388,7 @@ function addToCart(index){
       alert("out of stock");
       return;
     }
+  // if not in cart create element in cart
   }else{
     document.getElementById("cart").innerHTML += `<p id = "${product.name + " cart"}">` + 
     `${product.name} x <span id = "${product.name + " stock"}"> 1 </span>` + 
@@ -392,7 +397,7 @@ function addToCart(index){
   }
   adjustCart(product.price);
 }
-
+//only need two peices of data, waste to look up the product
 function removeFromCart(productName, price){
   stock = document.getElementById(productName + " stock").innerText;
   if (stock -1 <=0){
@@ -402,7 +407,8 @@ function removeFromCart(productName, price){
   }
   adjustCart(-price);
 }
-
+//adjusts cart totals based on the provided price, adding and removing elements
+//is handled by the add and remove from cart fuctions
 function adjustCart(price) {
   subtotal = Number(document.getElementById("subtotal").innerText);
   subtotal += price;
@@ -418,7 +424,7 @@ function adjustCart(price) {
   }
   document.getElementById("submit").innerHTML = str;
 }
-
+//reteives an object based on provided id
 function productLookup(id){
   let supplies = currentSeller.supplies;
   for (const category in supplies) {
@@ -433,5 +439,5 @@ function productLookup(id){
 
 function submitOrder(){
   alert("order has been submited");
-  init();
+  generateSellerPage();
 }

@@ -25,9 +25,14 @@ select {
   background-color: #eff1ff;
 }
 .checkout{
-  max-width:100%;
   background-color: #aac4ff;
+}
+.cart{
+  background-color: #AA98A9
 }
 .body{
   background-color: grey;
+}
+h1{
+  font-size: 26;
 }
