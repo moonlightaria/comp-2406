@@ -2,18 +2,32 @@ select {
   position: absolute;
   font-size: x-large;
 }
-
+.main{
+  max-width:100%;
+  height: auto;
+  margin-left:auto;
+  margin-right:auto;
+}
 .column {
   float: left;
+  padding: 5px;
 }
-
 .left {
   width: 20%;
+  background-color: #b1b2ff;
 }
-
 .middle {
   width: 40%;
+  background-color: #d2daff;
 }
 .right{
-  width: 40%
+  width: 35%;
+  background-color: #eff1ff;
+}
+.checkout{
+  max-width:100%;
+  background-color: #aac4ff;
+}
+.body{
+  background-color: grey;
 }

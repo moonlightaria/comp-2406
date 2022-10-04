@@ -6,21 +6,21 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
 
-  <body onload="init()"">
-    <div id="main">
+  <body onload="init()" class="body">
+    <div class="main" id="main">
       <div class="column left" id="left">
-        <h1 id="store name"> </h1>
+        <h2 id="store name"> </h2>
         <br>
-        <p> Minimum Order: $<span id="min order"></span> </p>
+        <p class=""> Minimum Order: $<span id="min order"></span> </p>
         <p> Delivery Fee: $<span id="delivery fee info"></span> </p>
         <br>
         <div id="categories"> </div>
-      </div>
+      </div>  
       <div class="column middle" id="middle"></div>
       <div class="column right" id="right">
         <select name="vendor-select" id="sellers"> </select>
         <br>
-        <div id="checkout">
+        <div class="checkout" id="checkout">
           <div id="cart"> </div>
           <p> Subtotal: <span id="subtotal"> </span> </p>
           <p> Tax: <span id="tax"> </span> </p>
