@@ -8,10 +8,10 @@
 //let password = "my-password";
 
 // Repeats first and last 3 chars
-//let password = "abc123abc";
+let password = "abc123abc";
 
 // Strong password
-let password = "StrongPassword1";
+//let password = "StrongPassword1";
 
 // See if function returns an error message or not
 let message = testPassword(password);
@@ -29,7 +29,7 @@ function testPassword(password) {
         return "Password may not contain a space.";
     }else if (!containsDigit(password)){
         return "Password must have at least one digit.";
-    }else if(password.substring(0,3) === password.substring(password.length-3)){
+    }else if(password.substr(0,3) === password.substr(-3,3)){
         return "The password may not begin and end with the same 3 characters.";
     }
     // Everything is good
