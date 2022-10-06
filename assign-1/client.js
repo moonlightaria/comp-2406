@@ -362,7 +362,7 @@ function generateSellerPage(){
         inventory += `<p>${current.name} ($${current.price.toFixed(2)},` +
         `stock=${current.stock}) <img src = add.png alt = "add button" ` + 
         `id= "${product}" onclick = addToCart(this.id) width = 3%`;
-        inventory += `<br><p>${current.description}</p> <br>`;
+        inventory += `<br><p>${current.description}</p> <br>`;        
       }
     }
     document.getElementById("categories").innerHTML = categories;
@@ -373,6 +373,9 @@ function generateSellerPage(){
 function validateSellerChange(){
   if (confirm("do you want to clear your cart")){
     generateSellerPage();
+  }else{
+    document.getElementById("sellers").selectedIndex = currentSeller.name;
+    console.log(currentSeller);
   }
 }
 //adds 1 of the given item to the cart of the provided id
@@ -382,16 +385,18 @@ function addToCart(id){
   if (document.getElementById(product.name + " cart")){
     //check if stock is maxed
     let stock = document.getElementById(product.name + " stock").innerText;
-    if (1 + Number(stock) <= product.stock){
-      document.getElementById(product.name + " stock").innerText = Number(stock) + 1;
-    }else{
+    if (1 + Number(stock) > product.stock){
       alert("out of stock");
       return;
     }
+    //add to cart
+    document.getElementById(product.name + " stock").innerText = Number(stock) + 1;
+    document.getElementById(product.name + "total").innerText = ((Number(stock) + 1)*product.price).toFixed(2);
   // if not in cart create element in cart
   }else{
     document.getElementById("cart").innerHTML += `<p id = "${product.name + " cart"}">` + 
-    `${product.name} x <span id = "${product.name + " stock"}"> 1 </span>` + 
+    `${product.name} x <span id = "${product.name + " stock"}"> 1 </span>` +
+    `: <span id = "${product.name + "total"}">$${product.price}</span>` +
     `<img src = remove.png alt = "remove button" id= "${product.name}" ` + 
     `onclick = "removeFromCart(this.id, ${product.price})" width = 3% height = "auto"</p>`;
   }
@@ -400,10 +405,11 @@ function addToCart(id){
 //only need two peices of data, waste to look up the product
 function removeFromCart(productName, price){
   stock = document.getElementById(productName + " stock").innerText;
-  if (stock -1 <=0){
+  if (Number(stock) -1 <=0){
     document.getElementById(productName + " cart").remove();
   }else{
-    document.getElementById(productName + " stock").innerText = stock -1;
+    document.getElementById(productName + " stock").innerText = Number(stock) -1;
+    document.getElementById(productName + "total").innerText = ((Number(stock) -1)*price).toFixed(2);
   }
   adjustCart(-price);
 }
