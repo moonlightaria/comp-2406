@@ -12,7 +12,7 @@ function add(e){
     let c = {
         "value": e.target.elements["text"].value,
         "highlight": false,
-    }
+    };
     checkboxes.push(c);
     e.target.elements["text"].value = "";
     document.getElementById("options").innerHTML += createElement(checkboxes[checkboxes.length-1].value, false);
