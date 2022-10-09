@@ -21,7 +21,7 @@ function add(e){
 function remove(){
     let checkedboxs = document.querySelectorAll('input[name="option"]:checked');
     checkedboxs.forEach((box) => {
-        checkboxes.splice(box.id, 1);
+        checkboxes.splice(checkboxes.indexOf(checkboxes.find((item) => item.value === box.id)), 1);
     });
     recreateElements();
 }
@@ -40,8 +40,8 @@ function highlight(){
 }
 
 function createElement(value, highlight){
-    let newElement = `<div id=${value}><input type="checkbox" name="option" form="checklist">`;
-    newElement += `<label id="${value + " text"}"`;
+    let newElement = `<div><input type="checkbox" id="${value}" name="option" form="checklist">`;
+    newElement += `<label `;
     if (highlight){
         newElement += `style="color:red"`;
         console.log("highlight");
