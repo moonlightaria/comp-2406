@@ -1,5 +1,6 @@
 let checkboxes = [];
 
+//adds buttons
 function init(){
     document.getElementById("input").onsubmit = add;
     document.getElementById("remove").onclick = remove;
@@ -7,6 +8,7 @@ function init(){
     document.getElementById("sort").onclick = sort;
 
 }
+//takes the event submition from the add button and uses it to create a new checkbox
 function add(e){
     e.preventDefault();
     let c = {
@@ -18,6 +20,7 @@ function add(e){
     document.getElementById("options").innerHTML += createElement(checkboxes[checkboxes.length-1].value, false);
     
 }
+//removes all checked boxes from the array and recreates the checklist
 function remove(){
     let checkedboxs = document.querySelectorAll('input[name="option"]:checked');
     checkedboxs.forEach((box) => {
@@ -25,20 +28,21 @@ function remove(){
     });
     recreateElements();
 }
+//sorts the array and recreates the checklist
 function sort(){
     checkboxes.sort((a, b) => a.value.localeCompare(b.value));
     recreateElements();
 }
+//finds all checked boxes and changes there highlight status, recreates the checklist
 function highlight(){
     let checkedboxes = document.querySelectorAll('input[name="option"]:checked');
     checkedboxes.forEach((box) => {
         temp = checkboxes.find((item) => item.value === box.id);
-        console.log(temp);
         temp.highlight = !temp.highlight;
     });
     recreateElements();
 }
-
+//creates a new checkbox to be added to the array
 function createElement(value, highlight){
     let newElement = `<div><input type="checkbox" id="${value}" name="option" form="checklist">`;
     newElement += `<label `;
@@ -49,6 +53,7 @@ function createElement(value, highlight){
     newElement += `>${value}</label><br></div>`;
     return newElement;
 }
+//recreates the checklist
 function recreateElements(){
     document.getElementById("options").innerHTML = 
       checkboxes.map((box) => createElement(box.value,box.highlight)).join(" ");
