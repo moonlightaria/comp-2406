@@ -21,10 +21,9 @@ function add(e){
 function remove(){
     let checkedboxs = document.querySelectorAll('input[name="option"]:checked');
     checkedboxs.forEach((box) => {
-        document.getElementById(box.id + " text").remove();
         checkboxes.splice(box.id, 1);
-        box.remove();
     });
+    recreateElements();
 }
 function sort(){
     checkboxes.sort((a, b) => a.value.localeCompare(b.value));
