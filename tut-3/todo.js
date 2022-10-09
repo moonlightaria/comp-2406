@@ -41,13 +41,13 @@ function highlight(){
 }
 
 function createElement(value, highlight){
-    let newElement = `<input type="checkbox" id=${value} name="option" form="checklist">`;
+    let newElement = `<div id=${value}><input type="checkbox" name="option" form="checklist">`;
     newElement += `<label id="${value + " text"}"`;
     if (highlight){
         newElement += `style="color:red"`;
         console.log("highlight");
     }
-    newElement += `>${value}</label><br>`;
+    newElement += `>${value}</label><br></div>`;
     return newElement;
 }
 function recreateElements(){
