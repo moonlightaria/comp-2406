@@ -13,7 +13,7 @@ const server = http.createServer(function (request, response) {
 	if(request.method === "GET"){
 		if(request.url === "/" || request.url === "/todo.html"){
 			//read the todo.html file and send it back
-			fs.readFile("todo.html", function(err, data){
+			fs.readFile("./tut-4/todo-server/todo.html", function(err, data){
 				if(err){
 					response.statusCode = 500;
 					response.write("Server error.");
@@ -27,7 +27,7 @@ const server = http.createServer(function (request, response) {
 			});
 		}else if(request.url === "/todo.js"){
 			//read todo.js file and send it back
-			fs.readFile("todo.js", function(err, data){
+			fs.readFile("./tut-4/todo-server/todo.js", function(err, data){
 				if(err){
 					response.statusCode = 500;
 					response.write("Server error.");
@@ -53,7 +53,7 @@ const server = http.createServer(function (request, response) {
 		}
 	}else if(request.method === "POST"){
 		if (request.url === "/list"){
-			console.log(request);
+			items.push()
 		}else{
 			//any handling in here
 			response.statusCode = 404;

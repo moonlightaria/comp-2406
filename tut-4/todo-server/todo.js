@@ -11,8 +11,6 @@ the list data to easily be stringified and transmitted.
 	
 */
 
-const { stringify } = require("querystring");
-
 let host = `127.0.0.1:3000`;
 
 //The array to store all items in the list
@@ -31,11 +29,18 @@ function pollServer(){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
     	if (this.readyState == 4 && this.status == 200) {
-			items = data;
+			console.log(xhttp);
+			data = JSON.parse(xhttp.response);
+			newItems = [];
+			data.forEach((elem => {
+				newItems.push({name: elem, light: false, checked: false});
+			}));
+			items = newItems;
+			console.log(items);
 			renderList(); //call function to fill in the list div
     	}
 	};
-	xhttp.open("GET", host + `/list` , true);
+	xhttp.open("GET", `/list` , true);
 	xhttp.send();
 }
 
@@ -70,11 +75,11 @@ function postList(item){
 	xhttp.onreadystatechange = function() {
     	if (this.readyState == 4 && this.status == 200) {
 			console.log("sent post");
-			items.push({name: itemName, light: false, checked: false});
+			items.push({name: item, light: false, checked: false});
 			renderList();
     	}
 	};
-	xhttp.open("POST", host + `/list` , true);
+	xhttp.open("POST",`/list` , true);
 	xhttp.send(item);
 }
 
@@ -96,7 +101,7 @@ function removeItem(){
 		renderList();
     	}
 	};
-	xhttp.open("PUT", host + `/list` , true);
+	xhttp.open("PUT", `/list` , true);
 	xhttp.send(item);
 }
 
