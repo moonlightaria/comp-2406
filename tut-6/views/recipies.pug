@@ -1,0 +1,9 @@
+html
+    head
+        title "Recipies"
+        meta(charset="UTF-8")
+    body()
+        h1 Recipies
+        each val,key in data
+            a(href=`http://localhost:3000/recipies/` + val.id)  #{val.name}
+            br

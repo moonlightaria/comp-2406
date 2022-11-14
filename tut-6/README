@@ -1,0 +1,12 @@
+name: evan hall
+date: 2022-11-11
+purpose: program to search add manage recipies
+
+dependacies: 
+specified in package.json
+
+run instuctions:
+node recipeserver.js
+ensure the following files/folders share a directory with the recipeserver.js on execution
+public
+views

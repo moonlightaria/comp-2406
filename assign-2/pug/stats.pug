@@ -1,0 +1,15 @@
+html
+    head
+        title "Office Supplies Order Stats"
+        meta(charset="UTF-8")
+        link(rel="stylesheet", href="styles.css")
+    body()
+        include ./partials/header
+        br
+        each vendor, key in vendors
+            div#key
+                h1 #{key}
+                p sales: #{vendor.sales}
+                p!= "average sale: " + (vendor.total/vendor.sales).toFixed(2)
+                p most popular: #{vendor.popular.name}, #{vendor.popular.quantity}
+

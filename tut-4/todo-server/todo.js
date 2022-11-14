@@ -25,18 +25,17 @@ function init(){
 	setInterval(pollServer, 5000);
 	
 }
+//polls the server every 5 seconds and updates the display with the new list
 function pollServer(){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
     	if (this.readyState == 4 && this.status == 200) {
-			console.log(xhttp);
 			data = JSON.parse(xhttp.response);
 			newItems = [];
 			data.forEach((elem => {
 				newItems.push({name: elem, light: false, checked: false});
 			}));
 			items = newItems;
-			console.log(items);
 			renderList(); //call function to fill in the list div
     	}
 	};
@@ -57,6 +56,7 @@ function isDuplicate(itemName){
 function addItem(){
 	//Verify an item name was entered
 	let itemName = document.getElementById("itemname").value;
+	document.getElementById("itemname").value ="";
 	if(itemName.length == 0){
 		alert("You must enter an item name.");
 		return;
@@ -70,39 +70,56 @@ function addItem(){
 		alert("Duplicate item names not allowed.");
 	}
 }
+//sends a post request with the name of the item to add to the list, if sucessful updates the list
 function postList(item){
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
+		if (this.status == 500){
+			alert("error in post");
+		}
     	if (this.readyState == 4 && this.status == 200) {
 			console.log("sent post");
 			items.push({name: item, light: false, checked: false});
 			renderList();
     	}
 	};
+	xhttp.timeout = 5000;
+	xhttp.ontimeout = function(){
+		alert("request timed out");
+	};
 	xhttp.open("POST",`/list` , true);
-	xhttp.send(item);
+	xhttp.send(JSON.stringify(item));
 }
 
 //Removes selected items
 //Strategy is actually to build a new array of items to keep
 //Then re-assign the items array to this new array
 function removeItem(){
+	//gets name of all items to remove
+	let checked = items.filter((item) => {
+		return item.checked;
+	}).map((item) => {
+		return item.name;
+	});
+	//sends request to remove items, on sucess items are removed form the list
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
+		if (this.status == 500){
+			alert("error in post");
+		}
     	if (this.readyState == 4 && this.status == 200) {
-			let newItems = [];
-			items.forEach(elem =>{
-				//If an item isn't checked, we want to keep it
-				if(!elem.checked){
-				newItems.push(elem);
-				}
+			items = items.filter((item) => {
+				return !checked.includes(item.name);
 			});
-		items = newItems;
-		renderList();
+			renderList();
     	}
 	};
+	xhttp.timeout = 5000;
+	xhttp.ontimeout = function(){
+		alert("request timed out");
+	};
 	xhttp.open("PUT", `/list` , true);
-	xhttp.send(item);
+	xhttp.send(JSON.stringify(checked));
 }
 
 //Toggles highlight of selected items
@@ -126,7 +143,7 @@ function sortItems(){
 		}else{
 			return 0;
 		}
-	})
+	});
 	renderList();
 }
 
@@ -159,7 +176,7 @@ function renderList(){
 		//Set highlighting based on property of item
 		let newDiv = document.createElement("div");
 		if(elem.light){
-			newDiv.style.backgroundColor = highlightColor
+			newDiv.style.backgroundColor = highlightColor;
 		}
 		
 		//Create and add the new checkbox
@@ -167,7 +184,7 @@ function renderList(){
 		newItem.type = "checkbox";
 		newItem.value = elem.name;
 		newItem.id = elem.name;
-		newItem.checked = elem.checked
+		newItem.checked = elem.checked;
 		newItem.onclick = toggleCheck;
 		newDiv.appendChild(newItem);
 	

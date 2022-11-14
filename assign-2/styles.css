@@ -2,7 +2,7 @@ body {
     padding-left: 10px;
 }
 
-select {
+.vendors {
     position: absolute;
     left: 70%;
     font-size: x-large;    
@@ -24,7 +24,7 @@ select {
     width: 29%;
 }
 
-button {
+.sumbit {
     width: 140px;
     padding: 15px;
     margin: 10px 0;

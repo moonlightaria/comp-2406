@@ -1,0 +1,16 @@
+{
+  "name": "tut-6",
+  "version": "1.0.0",
+  "description": "Tutorial 6",
+  "main": "recipeserver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Evan Hall",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2"
+  }
+}

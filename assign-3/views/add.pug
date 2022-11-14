@@ -1,0 +1,27 @@
+html
+    head
+        title "add vendor"
+        meta(charset="UTF-8")
+        script(defer, src='localhost:3000/js/add.js')
+    body()
+        include ./partials/header
+        p name:
+        input#name(
+            type='text'
+            name='name'
+        )
+        br
+        p delivery fee:
+        input#delivery_fee(
+            type='text'
+            name='delivery fee'
+        )
+        br
+        p min order:
+        input#min_order(
+            type='text'
+            name='min order'
+        )
+        br
+        br
+        button#sumbit submit

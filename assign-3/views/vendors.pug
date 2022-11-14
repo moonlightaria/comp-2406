@@ -1,0 +1,10 @@
+html
+    head
+        title "Vendors"
+        meta(charset="UTF-8")
+    body()
+        include ./partials/header
+        h1 Vendors
+        each val,key in data
+            a(href=`http://localhost:3000/vendors/` + val.id)  #{val.name}
+            br

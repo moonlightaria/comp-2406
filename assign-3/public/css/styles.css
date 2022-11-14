@@ -1,0 +1,19 @@
+.main{
+    max-width:100%;
+    height: auto;
+    margin-left:auto;
+    margin-right:auto;
+    display: flex;
+  }
+  .column {
+    padding: 25px;
+    display:inline-block;
+  }
+  .left {
+    width: 50%;
+    background-color: #d2daff;
+  }
+  .right{
+    width: 50%;
+    background-color: #eff1ff;
+  }

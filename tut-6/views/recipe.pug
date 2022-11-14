@@ -1,0 +1,12 @@
+html
+    head
+        title Recipie data.id
+        meta(charset="UTF-8")
+    body()
+        h1 #{data.name}
+        p prep: #{data.preptime}
+        p cook: #{data.cooktime}
+        p #{data.description}
+        each val in data.ingredients
+            p #{val.amount} #{val.unit} #{val.name}  
+        

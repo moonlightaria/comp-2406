@@ -42,27 +42,61 @@ const server = http.createServer(function (request, response) {
 		//Add any more 'routes' and their handling code here
 		//e.g., GET requests for "/list", POST request to "/list"
 		}else if (request.url === "/list"){
-			response.statusCode = 200
-			response.setHeader('Content-Type', 'application/json');
-			response.write(JSON.stringify(list));
-			response.end();
+				response.statusCode = 200;
+				response.setHeader('Content-Type', 'application/json');
+				response.write(JSON.stringify(list));
+				response.end();
 		}else{
-			response.statusCode = 404;
-			response.write("Unknwn resource.");
-			response.end();
+				response.statusCode = 404;
+				response.write("Unknwn resource.");
+				response.end();
 		}
 	}else if(request.method === "POST"){
+		//gets the data and pushes it onto the list
 		if (request.url === "/list"){
-			items.push()
+			try{
+				const chunks = [];
+				request.on("data", (chunk) => {
+					chunks.push(chunk);
+				});
+				request.on("end", () => {
+					const stringData = Buffer.concat(chunks).toString();
+					list.push(JSON.parse(stringData));
+				});
+				response.statusCode = 200;
+				response.end();
+		}catch(err){
+				response.statusCode = 500;
+				response.end();
+		}
 		}else{
-			//any handling in here
-			response.statusCode = 404;
-			response.write("Unknwn resource.");
+				//any handling in here
+				response.statusCode = 404;
+				response.write("Unknwn resource.");
+				response.end();
+		}
+		
+	}else if(request.method === "PUT"){
+		//gets data and removes from the list anything found within
+		if (request.url === "/list"){
+			try{
+				const chunks = [];
+				request.on("data", (chunk) => {
+					chunks.push(chunk);
+				});
+				request.on("end", () => {
+					const stringData = Buffer.concat(chunks).toString();
+					let purge = JSON.parse(stringData);
+					list = list.filter((item) => {
+						return purge.indexOf(item) <0;
+					});
+				});
+				response.statusCode = 200;
+				response.end();
+		}catch(err){
+			response.statusCode = 500;
 			response.end();
 		}
-	}else if(request.method === "PUT"){
-		if (request.url ==="/list"){
-			console.log(request);
 		}else{
 			//any handling in here
 			response.statusCode = 404;

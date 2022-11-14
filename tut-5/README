@@ -1,0 +1,27 @@
+name: evan hall
+date: 2022-11-05
+purpose: program to query hearthstone cards
+
+routes (GET):
+"/cards": returns all the cards
+"/cards?": returns a query of the cards
+"/cards/:id": returns the card data
+
+dependacies: 
+http
+pug
+path
+node:querystring
+
+
+run instuctions:
+node server.js
+ensure the following files share a directory with the server.js on execution
+card.pug
+cards.pug
+cards.json
+
+queries:
+"name": queries for all cards with a name containing the given substring
+"class": queries for all cards with the given class
+"limit": limits the amound of results returned to the given number

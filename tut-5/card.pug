@@ -1,0 +1,29 @@
+html
+    head
+        title #{card.name} (#{card.id})
+        meta(charset="UTF-8")
+    body()
+        h1 #{card.name}
+        br
+        br
+        p id: #{card.id}
+        p set: #{card.set}
+        if card.rarity === "FREE"
+            p rarity: *
+        else if card.rarity === "COMMON"
+            p rarity: **
+        else if card.rarity === "RARE"
+            p rarity: ***
+        else if card.rarity === "EPIC"
+            p rarity: ****
+        else if card.rarity === "LEGENDARY"
+            p rarity: *****
+        p class: #{card.cardClass}
+        p type: #{card.type}
+        if card.mechanics
+            h2 mechanics
+            ul
+                each val in card.mechanics
+                    li= val
+        p artist: #{card.artist}
+        p text: !{card.text}

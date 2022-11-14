@@ -1,0 +1,39 @@
+name: evan hall
+date: 2022-11-02
+purpose: program to display a store to a user and allow them to post orders to the server, along with getting info about thier order history
+
+routes (GET):
+"/","/index": home page
+"/order": order page
+"/stats": stats page
+"/styles.css": css file
+"/client.js": js to run order page
+"/vendors": list of vendor names
+"/vendors/{name}": the vendor with the name provided
+"/add.png": the add image
+"/remove.png": the remove image
+
+routes (POST):
+"/sale": processes the sale provided
+"/product": add a product to a vendor
+
+dependacies: 
+http
+fs
+path
+pug
+
+run instuctions:
+node server.js
+ensure the following files share a directory with the server.js on execution
+/pug (contains the pug files)
+/vendors (contains the vendor json files)
+styles.css
+client.js
+add.png
+remove.png
+
+design desisions:
+prioratized sending min data between client and server (faster to do extra cpu computation over waiting for data since no cpu bottleneck, less need to synconize state)
+converted all html to pug to use header partial and for practice
+tried using objects are paired arrays for storing data, paired array didn't work very well

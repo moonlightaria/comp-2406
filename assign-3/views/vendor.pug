@@ -1,0 +1,96 @@
+html
+    head
+        title #{data.name}
+        meta(charset="UTF-8")
+        link(rel="stylesheet", href="/css/styles.css")
+    body(onload = "init()")
+        include ./partials/header
+        #main.main
+            #left.columun.left
+                h2 products
+                each valA, keyA in data.supplies
+                    div(id=keyA)
+                        h3 #{keyA}:
+                        each valB, keyB in valA
+                            p #{keyB}: #{valB.stock} #{valB.name} for $#{valB.price}
+                            p #{valB.description}
+            #right.column.right
+                input#save(
+                    type='button'
+                    name='save'
+                    value= "save changes"
+                )
+                br
+                br
+                br
+                p name:
+                input#vendor(
+                    type='text'
+                    name='vendor'
+                    value= data.name
+                )
+                br
+                p delivery fee:
+                input#delivery_fee(
+                    type='text'
+                    name='delivery fee'
+                    value= data.delivery_fee
+                )
+                br
+                p min order:
+                input#min_order(
+                    type='text'
+                    name='min order'
+                    value= data.min_order
+                )
+                br
+                br
+                h2 Add Category
+                input#category(
+                    type='text'
+                    name='name'
+                )
+                input#addcat(
+                    type = "button"
+                    name = "add cat"
+                    value = "add category"
+                )
+                br
+                - let keys = Object.keys(data.supplies);
+                h2 Add Product
+                select#categories
+                    each category in keys
+                        option(value=category) #{category}
+                br
+                p name:
+                input#name(
+                    type='text'
+                    name='name'
+                )
+                br
+                p price:
+                input#price(
+                    type='text'
+                    name='price'
+                )
+                br
+                p stock:
+                input#stock(
+                    type='text'
+                    name='stock'
+                )
+                br
+                p discription:
+                input#desc(
+                    type='text'
+                    name='desc'
+                )
+                br
+                br
+                input#addprod(
+                    type='button'
+                    name='addprod'
+                    value = "add product"
+                )
+                br
+    script(src='/js/vendor.js')

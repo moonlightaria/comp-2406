@@ -27,7 +27,7 @@ function getNextQuestion(){
             //render this question on our page
 			render();
 		}
-	}
+	};
 	//request one question from a web server
 	xhttp.open("GET", `https://opentdb.com/api.php?amount=1`);
 	xhttp.send();
@@ -37,15 +37,15 @@ function render(){
 	// Implement this function
 	// it should display the question (and all four of the answers) on the page
 	// you can randomly shuffle the options before displaying them
-	console.log(currentQuestion);
 	let question = `<p> Question: ${currentQuestion.question} </p>`;
+	//array to hold all answers
 	let answers = JSON.parse(JSON.stringify(currentQuestion.incorrect_answers));
 	answers.push(currentQuestion.correct_answer);
-	console.log(answers);
 	randomizeArray(answers);
+	//generates the html for selecting an answer
 	let answer = answers.reduce((prev, ans) => {
 		let str = `<input type="radio" name="ans" value="${ans}" id="${ans}" onchange="updateAns(this.id)">` + 
-		`<label for="${ans}">${ans}</label> <br>`
+		`<label for="${ans}">${ans}</label> <br>`;
 		return prev + str;
 	}, "");
 	document.getElementById("question").innerHTML = question + answer;
@@ -55,8 +55,6 @@ function submitAnswer(){
 	// Implement this function
 	// This function runs when the button is clicked, - it should display user's score
 	// You can also request for another question from here to continue the game
-	console.log(currentAns);
-	console.log(currentQuestion.correct_answer);
 	if (currentAns == currentQuestion.correct_answer){
 		correct++;
 	}
@@ -68,12 +66,12 @@ function submitAnswer(){
 }
 
 //you can add other functions.
-
+//shows submit button when answer is chosen
 function updateAns(ans){
 	currentAns = ans;
-	document.getElementById("submit").style = ""	
+	document.getElementById("submit").style = "";
 }
-
+//algorithm to randomize an array
 function randomizeArray(arr){
 	for (let i = arr.length - 1; i > 0; i--){
 		let j = Math.floor(Math.random() * (i + 1));
