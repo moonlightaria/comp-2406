@@ -1,0 +1,18 @@
+html
+  head
+    meta(charset="UTF-8")
+  body()
+  include ./partials/header
+  br
+  div#main
+    h1 links
+    each val in links
+      a(href=`http://localhost:3000/${collection}/${val}`)  #{val}
+      br
+  if (page>1)
+    a(href=prev)
+      p prev
+  |
+  if (page<maxQuery)
+    a(href=next)
+      p next

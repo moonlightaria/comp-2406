@@ -2,8 +2,7 @@ html
     head
         title "add vendor"
         meta(charset="UTF-8")
-        script(defer, src='localhost:3000/js/add.js')
-    body()
+    body(onload="init()")
         include ./partials/header
         p name:
         input#name(
@@ -24,4 +23,5 @@ html
         )
         br
         br
-        button#sumbit submit
+        button#submit submit
+        script(src='/js/add.js')

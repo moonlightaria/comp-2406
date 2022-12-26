@@ -1,0 +1,16 @@
+div#workshops
+  h2 workshops
+  if owned && isArtist
+    input#workshop(type="button", value="add workshop", onclick=`newWorkshop()`)
+  br
+  h3 hosting 
+  br
+  each workshop in hosting
+    a(href=`http://localhost:3000/workshops/` + encodeURIComponent(workshop.name))
+      p #{workshop.name}
+  br
+  h3 attending
+  br
+  each workshop in attending
+    a(href=`http://localhost:3000/workshops/` + encodeURIComponent(workshop.name))
+      p #{workshop.name}

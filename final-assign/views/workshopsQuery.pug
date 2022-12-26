@@ -1,0 +1,16 @@
+html
+  head
+    title workshops query
+  body
+    include ./partials/header
+    br
+    h1 query workshops
+
+    p enter data to query for workshops
+
+    form(action='/workshops', method='get', enctype="application/x-www-form-urlencoded")
+      each val in ["name", "host", "capacity","page"]
+        label(for=val) #{val}:
+        input(id=val, type="textbox", name=val)
+        br
+      input(type='submit' value='Submit')

@@ -1,0 +1,40 @@
+html
+	head
+		title Card Searcher
+	
+	body
+		h1 Card Database
+
+		p Enter data into the filter form below and hit refresh to find matching cards.
+
+		form(action='/cards', method='get', enctype="application/x-www-form-urlencoded")
+			label(for='artist') Artist:
+			input#artist(type="textbox", name="artist")
+			br
+			label(for='name') Name:
+			input#name(type="textbox", name="name")
+			br
+			label(for='Min Attack') Min Attack:
+			input#minattack(type="textbox", name="minAttack")
+			br
+			label(for='Max Attack') Max Attack:
+			input#maxattack(type="textbox", name="maxAttack")
+			br
+			label(for='Min Health') Min Health:
+			input#minhealth(type="textbox", name="minHealth")
+			br
+			label(for='Max Health') Max Health:
+			input#maxhealth(type="textbox", name="maxHealth")
+			br
+			label(for='Class') Class:
+			select#class(name="class")
+				each val in data.class
+					option(value=val) #{val}
+			br
+			label(for='Rarity') Rarity:
+			select#rarity(name="rarity")
+				each val in data.rarity
+					option(value=val) #{val}
+			br
+			br
+			input(type='submit' value='Submit')

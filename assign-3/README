@@ -1,0 +1,13 @@
+name: evan hall
+date: 2022-11-14
+purpose: program to manage vendor information
+
+dependacies: 
+specified in package.json
+
+run instuctions:
+node server.js
+ensure the following files/folders share a directory with the recipeserver.js on execution
+public
+views
+vendors

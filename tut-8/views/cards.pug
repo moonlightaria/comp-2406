@@ -4,6 +4,6 @@ html
         meta(charset="UTF-8")
     body()
         h1 List of Cards
-        each val,key in cards
-            a(href=`http://localhost:3000/cards/` + val.id)  #{val.name} (#{val.id})
+        each val in cards
+            a(href=`http://localhost:3000/cards/` + val._id)  #{val.name}
             br

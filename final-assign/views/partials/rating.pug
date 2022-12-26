@@ -1,0 +1,8 @@
+if art.liked
+  input(id=`${art.name}Like`, type="button", value=`unlike: ${art.likes.length}`, onclick=`like("${art.name}")`)
+else
+  input(id=`${art.name}Like`, type="button", value=`like: ${art.likes.length}`, onclick=`like("${art.name}")`)
+input(id=`${art.name}AddReview`, type="button", value="review" onclick=`review("${art.name}")`)
+input(id=`${art.name}DeleteReview`, type="button", value="deleteReview", onclick=`deleteReview("${art.name}")`)
+div(id=`${art.name}ReviewSpace`)
+script(src="http://localhost:3000/js/artwork.js")

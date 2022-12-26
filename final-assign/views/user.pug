@@ -1,0 +1,36 @@
+html
+  head
+    title #{username}
+    meta(charset="UTF-8")
+    link(rel="stylesheet", href="http://localhost:3000/css/styles.css")
+  body()
+    include ./partials/header
+    br
+    h1 #{username}
+    div#main
+      div#left.column.left
+        include ./partials/following
+        include ./partials/workshops
+      div#middle.column.middle
+        div#artwork
+          div#artHeader
+            h2 artworks
+            |
+            if owned
+              if isArtist
+                input#artist(type="button", value="patron", onclick=`changeAccountType()`)
+                |
+                input#art(type="button", value="add Art", onclick=`newArtwork()`)
+              else
+                input#artist(type="button", value="artist", onclick=`changeAccountType()`)
+          each art in artworks
+            a(href="http://localhost:3000/artwork/" + encodeURIComponent(art.name))
+              img(src=art.image,style={ width:300, height:auto})
+      if owned
+        div#right.column.right
+          div#notifications
+            h2 notifications #{notifications.length}
+            each notification in notifications
+              p #{notification.user} #{notification.action}
+              br
+    script(src="http://localhost:3000/js/user.js")

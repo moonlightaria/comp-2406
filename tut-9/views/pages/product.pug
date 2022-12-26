@@ -1,0 +1,34 @@
+html
+	head
+		title Store Manager - #{product.name}
+body
+	include ../partials/header
+	br
+	
+	|Name: #{product.name}
+	br
+	|Price: #{product.price}
+	br
+	|ID: #{product.id}
+	br
+	br
+	if product.buyers.length > 0
+		|Purchased By:
+		br
+		each buyer in product.buyers
+			a(href=buyer) #{buyer}
+			br
+		br
+		br
+	if product.reviews.length > 0
+		|Reviews:
+		br
+		each review in product.reviews
+			a(href=review) #{review}
+			br
+	if recommended.length > 0
+		|recommended
+		br
+		each val in recommended
+			a(href=val.url) #{val.name}
+			br

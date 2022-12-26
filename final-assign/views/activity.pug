@@ -1,0 +1,23 @@
+html
+  head
+    title #{username}
+    meta(charset="UTF-8")
+    link(rel="stylesheet", href="http://localhost:3000/css/styles.css")
+  body()
+    include ./partials/header
+    br
+    div#main
+      each art in artworks
+        div(id=art.name)
+          h1 #{art.name} by #{art.artist}
+          br
+          a(href="http://localhost:3000/artwork/" + encodeURIComponent(art.name))
+            img(src=art.image)
+          br
+          include ./partials/rating
+          br
+          div(id=`${art.name}Review`)
+            p #{art.review}
+  script(src="http://localhost:3000/js/artwork.js") 
+
+

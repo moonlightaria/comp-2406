@@ -1,0 +1,79 @@
+[
+  {
+    "username": "Mark Ruwedel",
+    "password": "Mark Ruwedel",
+    "isArtist": true,
+    "following": ["Homer Watson"],
+    "notifications": []
+  },
+  {
+    "username": "Robert Bean",
+    "password": "Robert Bean",
+    "isArtist": true,
+    "following": ["Homer Watson"],
+    "notifications": []
+  },
+  {
+    "username": "Homer Watson",
+    "password": "Homer Watson",
+    "isArtist": false,
+    "following": [],
+    "notifications": []
+  },
+  {
+    "username": "Francisco Goya y Lucientes",
+    "password": "Francisco Goya y Lucientes",
+    "isArtist": true,
+    "following": ["Homer Watson"],
+    "notifications": []
+  },
+  {
+    "username": "Franklin Carmichael",
+    "password": "Franklin Carmichael",
+    "isArtist": false,
+    "following": ["Homer Watson"],
+    "notifications": []
+  },
+  {
+    "username": "Oviloo Tunnillie",
+    "password": "Oviloo Tunnillie",
+    "isArtist": true,
+    "following": ["Homer Watson"],
+    "notifications": []
+  },
+  {
+    "username": "Joe Fafard",
+    "password": "Joe Fafard",
+    "isArtist": true,
+    "following": ["Homer Watson"],
+    "notifications": []
+  },
+  {
+    "username": "Louis Jobin",
+    "password": "Louis Jobin",
+    "isArtist": true,
+    "following": ["Homer Watson"],
+    "notifications": []
+  },
+  {
+    "username": "Giacomo Piazzetta",
+    "password": "Giacomo Piazzetta",
+    "isArtist": true,
+    "following": ["Homer Watson"],
+    "notifications": []
+  },
+  {
+    "username": "Elizabeth Wyn Wood",
+    "password": "Elizabeth Wyn Wood",
+    "isArtist": true,
+    "following": ["Homer Watson"],
+    "notifications": []
+  },
+  {
+    "username": "Mattiusi Iyaituk",
+    "password": "Mattiusi Iyaituk",
+    "isArtist": true,
+    "following": ["Homer Watson"],
+    "notifications": []
+  }
+]

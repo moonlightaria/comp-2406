@@ -1,0 +1,10 @@
+name: evan hall
+date: 2022-12-03
+purpose: program to query store data
+
+dependacies: 
+specified in package.json
+
+run instuctions:
+node server.js
+ensure all files provided share a directory with server.js

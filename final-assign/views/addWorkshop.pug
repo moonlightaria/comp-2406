@@ -1,0 +1,22 @@
+html
+	head
+		title addWorkshop
+
+	body
+		include ./partials/header
+		br
+		h1 add workshop
+
+		p enter data to add a workshop
+
+		form(id="form", action='/workshop', method='post', enctype="application/x-www-form-urlencoded")
+			each val in ["name", "capacity", "category", "medium"]
+				label(for=val) #{val}:
+				br
+				input(id=val, type="textbox", name=val)
+				br
+			label(for="description") description:
+			br
+			textarea(id="description", form="form", name="description", rows=4, cols=50)
+			br
+			input(type='submit' value='Submit')

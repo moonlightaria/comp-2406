@@ -1,0 +1,31 @@
+html
+    head
+        title #{login}
+        meta(charset="UTF-8")
+        link(rel="stylesheet", href="/css/styles.css")
+    body(onload = "init()")
+        h1 login
+        p username:
+        input#username(
+            type='text'
+            name='username'
+        )
+        br
+        p password:
+        input#password(
+            type='text'
+            name='password'
+        )
+        br
+        input#login(
+            type = "button"
+            name = "login"
+            value = "login"
+        )
+        br
+        input#create(
+            type = "button"
+            name = "create"
+            value = "create account"
+        )
+    script(src='/js/login.js')

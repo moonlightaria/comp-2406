@@ -1,0 +1,35 @@
+html
+  head
+    title #{username}
+    meta(charset="UTF-8")
+    link(rel="stylesheet", href="http://localhost:3000/css/styles.css")
+  body()
+    include ./partials/header
+    br
+    div#main
+      h1 #{workshop.name}
+      if owned
+        input#delete(type="button", value="delete workshop", onclick=`deleteWorkshop("${workshop.name}")`)
+        script(src="http://localhost:3000/js/deleteWorkshop.js")
+      else
+        if attending
+          input#attend(type="button", value="cancel attendance", onclick=`attend("${workshop.name}")`)
+        else
+          input#attend(type="button", value="attend", onclick=`attend("${workshop.name}")`)
+        script(src="http://localhost:3000/js/attend.js")
+      br
+      a(href="http://localhost:3000/user/" + encodeURIComponent(workshop.host))
+        p Host: #{workshop.host}
+      br
+      p Max Attendants: #{workshop.capacity}
+      br
+      a(href="http://localhost:3000/workshops?category=" + encodeURIComponent(workshop.category))
+        p Category: #{workshop.category}
+      br
+      a(href="http://localhost:3000/workshops?medium" + encodeURIComponent(workshop.medium))
+        p Medium: #{workshop.medium}
+      p Description: #{workshop.description}
+      p attendees
+      each val in workshop.attendees
+        a(href="http://localhost:3000/user/" + encodeURIComponent(val))
+        p #{val}

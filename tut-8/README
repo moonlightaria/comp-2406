@@ -1,0 +1,12 @@
+name: evan hall
+date: 2022-11-27
+purpose: program to query hearthstone cards
+
+dependacies: 
+specified in package.json
+
+run instuctions:
+node server.js
+ensure database is initalized by running database-initalizer.js
+ensure the following files/folders share a directory with the server.js on execution
+views

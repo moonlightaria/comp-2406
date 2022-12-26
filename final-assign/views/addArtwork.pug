@@ -1,0 +1,27 @@
+html
+	head
+		title addArtwork
+
+	body
+		include ./partials/header
+		br
+		h1 add artwork
+
+		p enter data to add an artwork
+
+		form(id="form", action='/artwork', method='post', enctype="application/x-www-form-urlencoded")
+			each val in ["name", "year", "category", "medium"]
+				label(for=val) #{val}:
+				br
+				input(id=val, type="textbox", name=val)
+				br
+			label(for="description") description:
+			br
+			textarea(id="description", form="form", name="description", rows=4, cols=50)
+			br
+			label(for="image") image:
+			br
+			textarea(id="image", form="form", name="image", rows=1, cols=50)
+			br
+			input(type='submit' value='Submit')
+		div#return

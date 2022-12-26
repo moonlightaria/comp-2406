@@ -1,0 +1,36 @@
+html
+  head
+    title #{username}
+    meta(charset="UTF-8")
+    link(rel="stylesheet", href="http://localhost:3000/css/styles.css")
+  body()
+    include ./partials/header
+    br
+    div#main
+      div#left.column.left
+        img(src=art.image, style={ width:300, height:auto})
+        br
+        if !owned
+          div#rating
+            include ./partials/rating
+        else
+          p likes: #{art.likes.length}
+          input#delete(type="button", value="delete artwork", onclick=`deleteArt("${art.name}")`)
+          script(src="http://localhost:3000/js/deleteArt.js") 
+        br
+        div(id=`${art.name}Review`)
+          include ./partials/artReviews
+      div#right.column.right
+        p Name: #{art.name}
+        br
+        p Year: #{art.year}
+        br
+        a(href="http://localhost:3000/user/" + encodeURIComponent(art.artist))
+          p Artist: #{art.artist}
+        br
+        a(href="http://localhost:3000/artworks?category=" + encodeURIComponent(art.category))
+          p Category: #{art.category}
+        br
+        a(href="http://localhost:3000/artworks?medium=" + encodeURIComponent(art.medium))
+          p Medium: #{art.medium}
+        p Description: #{art.description}

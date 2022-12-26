@@ -1,0 +1,15 @@
+div#following
+  h2 follows
+  p following: #{following.length}
+  if !owned
+    if isFollowing
+      input#follow(type="button", value=`unfollow: ${numFollowing}`, onclick=`follow("${username}")`)
+    else
+      input#follow(type="button", value=`follow: ${numFollowing}`, onclick=`follow("${username}")`)
+  else
+    p followers: #{numFollowing}
+
+  br
+  each user in following
+    a(href=`http://localhost:3000/user/` + encodeURIComponent(user))
+      p #{user}
